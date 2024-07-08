@@ -5,18 +5,14 @@ body {
     height: 100vh;
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    background-color: #FFFFFF;
 }
 
 .container {
     text-align: center;
 }
 
-button {
-    font-size: 1.2rem;
-    padding: 10px 20px;
-    margin-bottom: 20px;
-}
+
 
 .drum-pad {
     display: inline-block;
@@ -32,6 +28,10 @@ button {
     transition: background-color 0.2s;
 }
 
+.active {
+    background-color: yellow;
+}
+
 .drum-pad:active {
-    background-color: #bbb;
+    background-color: yellow;
 }

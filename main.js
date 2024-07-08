@@ -1,10 +1,5 @@
 const context = new AudioContext();
 
-window.addEventListener('load', () => {
-    const buttonEl = document.getElementById('start-audio');
-    buttonEl.disabled = false;
-    buttonEl.addEventListener('click', () => context.resume());
-});
 
 // 드럼 소리 샘플 파일을 불러오기
 const loadSample = async (url) => {
@@ -51,40 +46,59 @@ class DrumCell {
 
 document.addEventListener('keydown', async (event) => {
     let sample;
-    switch (event.key) {
+    let pad;
 
+    switch (event.key) {
         case 'q':
             sample = await hihatSample;
+            pad = document.getElementById('hihat');
             break;        
         case 'w':
             sample = await crashSample;
+            pad = document.getElementById('crash');
             break;        
         case 'e':
-            sample = await rideSample ;
+            sample = await rideSample;
+            pad = document.getElementById('ride');
             break;        
         case 'a':
             sample = await snareSample;
+            pad = document.getElementById('snare');
             break;
         case 's':
             sample = await smallSample;
+            pad = document.getElementById('small-tom');
             break;
         case 'd':
             sample = await middleSample;
+            pad = document.getElementById('middle-tom');
             break;
         case 'z':
             sample = await floorSample;
+            pad = document.getElementById('floor-tom');
             break;
         case 'x':
             sample = await kickSample;
+            pad = document.getElementById('kick');
             break;
-
         default:
-            return; 
+            return;
+    }
+
+    if (pad) {
+        pad.classList.add('active');
     }
 
     playSample(sample, context);
 
+    document.addEventListener('keyup', (event) => {
+        if (pad) {
+            pad.classList.remove('active');
+        }
+    }, { once: true });
 });
+
+
 
 
 document.querySelectorAll('.drum-pad').forEach(pad => {
